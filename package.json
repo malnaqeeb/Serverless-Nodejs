@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-assignment",
+  "version": "1.0.0",
+  "description": "Example repo for https://github.com/dherault/serverless-offline/issues/747",
+  "scripts": {
+    "start": "sls offline start"
+  },
+  "author": "Mosleh",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^1.50.1",
+    "serverless-offline": "^5.10.1"
+  },
+  "dependencies": {
+    "http-errors": "^1.7.3",
+    "joi": "^14.3.1",
+    "serverless-dynamodb-local": "^0.2.39"
+  }
+}

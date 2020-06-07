@@ -1,0 +1,82 @@
+service: nodejs-assignment
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  stage: dev
+  environment:
+    INVOKE_ENDPOINT: 'http://localhost:4000'
+    INVOKE_FUNCTION: "${self:service}-${self:provider.stage}-handleDisburse"
+    LOAN_TABLE: ${self:service}-${self:provider.stage}-loan
+
+custom:
+  serverless-offline:
+    port: 4000
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      migrate: true # create the table
+      inMemory: true
+      onStart: true
+
+functions:
+  app:
+    handler: src/loan/app.handler
+    events:
+      - http:
+          method: post
+          path: /api/{id}
+  handleDisburse:
+    handler: src/disburse/handleDisburse.handler
+  createLoan:
+    handler: src/loan/create.handler
+    events:
+      - http:
+          method: POST
+          path: /loan/{companyId}
+  getAllLoans:
+    handler: src/loan/list.handler
+    events:
+      - http:
+          method: GET
+          path: /loans
+  updateLoan:
+    handler: src/loan/updateAmount.handler
+    events:
+      - http:
+          method: PUT
+          path: /loan/{id}
+          request:
+            parametres:
+              id: true
+  findById:
+    handler: src/loan/findById.handler
+    events:
+      - http:
+          method: GET
+          path: /loan/{id}
+          request:
+            parametres:
+              id: true
+resources:
+  Resources:
+    LoansDynamoDBTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: ${self:provider.environment.LOAN_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
