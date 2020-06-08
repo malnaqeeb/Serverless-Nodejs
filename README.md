@@ -2,13 +2,14 @@
 2. install dependencies: `npm install`
 3. start serverless offline: `sls offline start` or `npm start`
 4. Endpoints
+
 #### Creat loan( if the company is active):
            - eindpoint : `localhost:4000/loan/CompanyId`
            - body request: { "amount" : number }
            - method : POST
-#### Creat loanPayments proccess and updates table status, payment & amount (loan balance)
+#### Payments proccess and updates table status, payment & amount (loan balance)
            - eindpoint : `localhost:4000/api/CompanyId`
-           - body request: { "amount" : number }
+           - body request: { "payment" : number }
            - method: POST
 #### delete loan:
            - eindpoint : `localhost:4000/loan/CompanyId`
