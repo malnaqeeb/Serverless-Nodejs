@@ -4,34 +4,34 @@
 4. Endpoints
 
 #### Creat loan( if the company is active):
-           - eindpoint : `localhost:4000/loan/CompanyId`
-           - body request: { "amount" : number }
-           - method : POST
+- eindpoint : `localhost:4000/loan/CompanyId`
+- body request: { "amount" : number }
+- method : POST
 #### Payments proccess and updates table status, payment & amount (loan balance)
-           - eindpoint : `localhost:4000/api/CompanyId`
-           - body request: { "payment" : number }
-           - method: POST
+- eindpoint : `localhost:4000/api/CompanyId`
+- body request: { "payment" : number }
+- method: POST
 #### delete loan:
-           - eindpoint : `localhost:4000/loan/CompanyId`
-           - body request: no need
-           - Method: DELETE
+- eindpoint : `localhost:4000/loan/CompanyId`
+- body request: no need
+- Method: DELETE
 #### Find loan:
-           - eindpoint : `localhost:4000/loan/CompanyId`
-           - body request: no need
-           - method: GET
+- eindpoint : `localhost:4000/loan/CompanyId`
+- body request: no need
+- method: GET
 #### Get all loans:
-           - eindpoint : `localhost:4000/loans`
-           - body request: no need
-           - method: GET
+- eindpoint : `localhost:4000/loans`
+- body request: no need
+- method: GET
 #### Update loan:
-           - eindpoint : `localhost:4000/loan/CompanyId`
-           - body request: no need
-           - method: PUT
+- eindpoint : `localhost:4000/loan/CompanyId`
+- body request: no need
+- method: PUT
 
 ## The assignment contains three folders;
 
 1. handling: logical functionality (check the inserted settlement and update the dynamo table)
 2. loan :
-        - lambda functions (CRUD)  
-        - app.js: will get the response from handling functions and invoke handlingDisburse
+- lambda functions (CRUD)  
+- app.js: will get the response from handling functions and invoke handlingDisburse
 3. disburse: to evaluate the checkBalance result and send back a response to handling functions (which has been imported to app.js)
