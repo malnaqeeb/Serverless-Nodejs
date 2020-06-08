@@ -1,36 +1,36 @@
 1. clone this repo and cd into its directory
 2. install dependencies: `npm install`
 3. start serverless offline: `sls offline start` or `npm start`
-   4- Endpoints
-       *Creat loan( if the company is active):
+4. Endpoints
+#### Creat loan( if the company is active):
            - eindpoint : `localhost:4000/loan/CompanyId`
            - body request: { "amount" : number }
            - method : POST
-       *Payments proccess and updates table status, payment & amount (loan balance)
+#### Creat loanPayments proccess and updates table status, payment & amount (loan balance)
            - eindpoint : `localhost:4000/api/CompanyId`
            - body request: { "amount" : number }
            - method: POST
-       *delete loan:
+#### delete loan:
            - eindpoint : `localhost:4000/loan/CompanyId`
            - body request: no need
            - Method: DELETE
-        *Find loan:
+#### Find loan:
            - eindpoint : `localhost:4000/loan/CompanyId`
            - body request: no need
            - method: GET
-        *Get all loans:
+#### Get all loans:
            - eindpoint : `localhost:4000/loans`
            - body request: no need
            - method: GET
-         *Update loan:
+#### Update loan:
            - eindpoint : `localhost:4000/loan/CompanyId`
            - body request: no need
            - method: PUT
 
-The assignment contains three folders;
+## The assignment contains three folders;
 
-1- handling: logical functionality (check the inserted settlement and update the dynamo table)
- 2- loan :
+1. handling: logical functionality (check the inserted settlement and update the dynamo table)
+2. loan :
         - lambda functions (CRUD)  
         - app.js: will get the response from handling functions and invoke handlingDisburse
- 3- disburse: to evaluate the checkBalance result and send back a response to handling functions (which has been imported to app.js)
+3. disburse: to evaluate the checkBalance result and send back a response to handling functions (which has been imported to app.js)
