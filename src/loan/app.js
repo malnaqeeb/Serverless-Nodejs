@@ -26,13 +26,17 @@ module.exports.handler = async (event, context, callback) => {
   } catch (error) {
     console.error(error);
   }
-  const result = await handleBalance(
-    getDesiredLoan,
-    requestBody,
-    responseFromDisbursedFunction
-  );
-  return {
-    statusCode: 200,
-    body: JSON.stringify(result),
-  };
+  try {
+    const result = await handleBalance(
+      getDesiredLoan,
+      requestBody,
+      responseFromDisbursedFunction
+    );
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
+  } catch (error) {
+    console.error(error);
+  }
 };
