@@ -6,7 +6,7 @@
 4. Endpoints
 
 #### Creat loan( if the company is active):
-- from (https://api.overheid.io/openkvk/{id}) the {id} is [type]+[dossiernummer]+[subdossiernummer]+[handelsnaam]
+- from (https://api.overheid.io/openkvk/{id}) the {id} is [type]+[dossiernummer]+[subdossiernummer]+[handelsnaam] (for example: rechtspersoon-12000192-ba-geurts-janssen-beheer-bv)
 - eindpoint : `localhost:4000/loan/CompanyId`
 - body request: { "amount" : number }
 - method : POST
