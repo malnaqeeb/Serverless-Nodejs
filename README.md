@@ -1,26 +1,36 @@
-This is a showcase for serverless-offline issue: https://github.com/dherault/serverless-offline/issues/747
-
-Steps to reproduce:
-
 1. clone this repo and cd into its directory
-1. install dependencies: `npm install`
-1. start serverless offline: `sls offline` or `npm start`
-1. navigate browser to `localhost:4000/api`
+2. install dependencies: `npm install`
+3. start serverless offline: `sls offline start` or `npm start`
+   4- Endpoints
+       *Creat loan( if the company is active):
+           - eindpoint : `localhost:4000/loan/CompanyId`
+           - body request: { "amount" : number }
+           - method : POST
+       *Payments proccess and updates table status, payment & amount (loan balance)
+           - eindpoint : `localhost:4000/api/CompanyId`
+           - body request: { "amount" : number }
+           - method: POST
+       *delete loan:
+           - eindpoint : `localhost:4000/loan/CompanyId`
+           - body request: no need
+           - Method: DELETE
+        *Find loan:
+           - eindpoint : `localhost:4000/loan/CompanyId`
+           - body request: no need
+           - method: GET
+        *Get all loans:
+           - eindpoint : `localhost:4000/loans`
+           - body request: no need
+           - method: GET
+         *Update loan:
+           - eindpoint : `localhost:4000/loan/CompanyId`
+           - body request: no need
+           - method: PUT
 
-Unsupported Media Type error is logged in the console:
+The assignment contains three folders;
 
-    Serverless: GET /api (λ: apiTest)
-    Serverless: Failure: Unsupported Media Type
-    UnknownError: Unsupported Media Type
-
-Expected - invoke lambda from within other http-event triggered lambda
-
-I'm using node version 10.15.3
-
----
-
-UPDATE: as pointed by @vepanimas, it works if function name is specified as: `{service-name}-{stage}-{name}`
-
-in our case:
-
-    INVOKE_FUNCTION: '${self:service}-${self:provider.stage}-invokeTest'
+1- handling: logical functionality (check the inserted settlement and update the dynamo table)
+ 2- loan :
+        - lambda functions (CRUD)  
+        - app.js: will get the response from handling functions and invoke handlingDisburse
+ 3- disburse: to evaluate the checkBalance result and send back a response to handling functions (which has been imported to app.js)
