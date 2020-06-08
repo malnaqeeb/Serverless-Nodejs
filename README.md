@@ -1,9 +1,12 @@
+
+
 1. clone this repo and cd into its directory
 2. install dependencies: `npm install`
 3. start serverless offline: `sls offline start` or `npm start`
 4. Endpoints
 
 #### Creat loan( if the company is active):
+- from (https://api.overheid.io/openkvk/{id}) the {id} is [type]+[dossiernummer]+[subdossiernummer]+[handelsnaam]
 - eindpoint : `localhost:4000/loan/CompanyId`
 - body request: { "amount" : number }
 - method : POST
