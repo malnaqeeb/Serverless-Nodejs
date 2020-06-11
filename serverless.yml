@@ -10,7 +10,7 @@ provider:
   region: us-east-1
   stage: dev
   environment:
-    INVOKE_ENDPOINT: 'http://localhost:4000'
+    INVOKE_ENDPOINT: "http://localhost:4000"
     INVOKE_FUNCTION: "${self:service}-${self:provider.stage}-handleDisburse"
     LOAN_TABLE: ${self:service}-${self:provider.stage}-loan
 
@@ -61,6 +61,15 @@ functions:
     events:
       - http:
           method: GET
+          path: /loan/{id}
+          request:
+            parametres:
+              id: true
+  deleteLoan:
+    handler: src/loan/delete.handler
+    events:
+      - http:
+          method: DELETE
           path: /loan/{id}
           request:
             parametres:
