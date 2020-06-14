@@ -1,18 +1,29 @@
 {
   "name": "nodejs-assignment",
+  "jest": {
+    "verbose": true
+  },
   "version": "1.0.0",
   "description": "Example repo for https://github.com/dherault/serverless-offline/issues/747",
   "scripts": {
-    "start": "sls offline start"
+    "start": "sls offline start",
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "author": "Mosleh",
   "license": "ISC",
   "devDependencies": {
     "serverless": "^1.50.1",
-    "serverless-offline": "^5.10.1"
+    "serverless-offline": "^5.12.1"
   },
   "dependencies": {
+    "@shelf/jest-dynamodb": "^1.7.0",
+    "aws-sdk": "^2.695.0",
+    "axios": "^0.19.2",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
     "http-errors": "^1.7.3",
+    "jest": "^26.0.1",
     "joi": "^14.3.1",
     "serverless-dynamodb-local": "^0.2.39"
   }

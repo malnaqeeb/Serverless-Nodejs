@@ -6,7 +6,7 @@ const handleBalance = async (
   requestBody,
   responseFromDisbursedFunction
 ) => {
-  const data = await JSON.parse(requestBody);
+  const data = await requestBody;
   const schema = Joi.object().keys({
     payment: Joi.number().required(),
   });
@@ -38,12 +38,14 @@ const handleBalance = async (
   } else if (responseFromDisbursedFunction === "Exceed") {
     return {
       statusCode: 400,
-      body: JSON.stringify(`Your payment should be equal or less than your balance: ${loan.amount}`),
+      body: JSON.stringify(
+        `Your payment should be equal or less than your balance: ${loan.amount}`
+      ),
     };
   }
 
   const params = {
-    TableName: process.env.LOAN_TABLE,
+    TableName: process.env.LOAN_TABLE || "nodejs-assignment-dev-loan",
     Key: {
       id: loan.id,
     },

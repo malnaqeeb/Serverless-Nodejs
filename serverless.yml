@@ -13,6 +13,7 @@ provider:
     INVOKE_ENDPOINT: "http://localhost:4000"
     INVOKE_FUNCTION: "${self:service}-${self:provider.stage}-handleDisburse"
     LOAN_TABLE: ${self:service}-${self:provider.stage}-loan
+    AWS_SDK_LOAD_CONFIG: 1
 
 custom:
   serverless-offline:

@@ -2,10 +2,12 @@ const Lambda = require("aws-sdk/clients/lambda");
 const findone = require("../handling/findone");
 const handleBalance = require("../handling/handleBalance");
 const checkBalance = require("../handling/checkBalance");
+var AWS = require('aws-sdk');
+AWS.config.update({region:'us-east-1'});
 
-module.exports.handler = async (event, context, callback) => {
+module.exports.handler = async (event) => {
   let responseFromDisbursedFunction;
-  const requestBody = await event.body;
+  const requestBody = await JSON.parse(event.body);
   const id = event.pathParameters;
   const getDesiredLoan = await findone(id.id);
   const responseFromCheckBalance = await checkBalance(
@@ -13,9 +15,12 @@ module.exports.handler = async (event, context, callback) => {
     requestBody
   );
   const commandToBeSend = responseFromCheckBalance.body;
-  const lambda = new Lambda({ endpoint: process.env.INVOKE_ENDPOINT });
+  const lambda = new Lambda({
+    endpoint: process.env.INVOKE_ENDPOINT || "http://localhost:4000",
+  });
   const params = {
-    FunctionName: process.env.INVOKE_FUNCTION,
+    FunctionName:
+      process.env.INVOKE_FUNCTION || "nodejs-assignment-dev-handleDisburse",
     InvocationType: "RequestResponse",
     Payload: JSON.stringify({ msg: commandToBeSend }),
   };

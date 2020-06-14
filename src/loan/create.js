@@ -4,13 +4,12 @@ const axios = require("axios");
 const OFFERED = "offered";
 
 module.exports.handler = async (event) => {
-  const data = JSON.parse(event.body);
+  const data = await JSON.parse(event.body);
   const timestamp = new Date();
   const schema = Joi.object().keys({
     amount: Joi.number().required(),
-    payment: Joi.number()
+    payment: Joi.number(),
   });
-
   const { error } = Joi.validate(data, schema);
   if (error) {
     return {
@@ -28,7 +27,7 @@ module.exports.handler = async (event) => {
       {
         headers: {
           "ovio-api-key":
-            "84a5c55367ba559da500c7e8868253b88538ed29c456434a3bb7ebcfcfaf582c",
+            "52aed29a2fc3fc3241c53f07afe5d4a66f08f9c9ed5546cb7265524d44bd538d",
         },
       }
     );
@@ -47,7 +46,7 @@ module.exports.handler = async (event) => {
   }
 
   const params = {
-    TableName: process.env.LOAN_TABLE,
+    TableName: process.env.LOAN_TABLE || "nodejs-assignment-dev-loan",
     Item: {
       id: companyId,
       amount: data.amount,
@@ -58,7 +57,6 @@ module.exports.handler = async (event) => {
       companyInfo,
     },
   };
-
   try {
     await dynamoDB.put(params).promise();
     return {

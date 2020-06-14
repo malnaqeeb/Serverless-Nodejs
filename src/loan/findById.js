@@ -1,11 +1,11 @@
-const dynamoDB = require("../../dynamodb")
+const dynamoDB = require("../../dynamodb");
 
 module.exports.handler = async (event) => {
   const id = event.pathParameters.id;
   try {
     const results = await dynamoDB
       .get({
-        TableName: process.env.LOAN_TABLE,
+        TableName: process.env.LOAN_TABLE || "nodejs-assignment-dev-loan",
         Key: {
           id,
         },

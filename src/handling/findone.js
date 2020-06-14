@@ -4,7 +4,7 @@ const findone = async (id) => {
   try {
     const results = await dynamoDB
       .get({
-        TableName: process.env.LOAN_TABLE,
+        TableName: process.env.LOAN_TABLE || "nodejs-assignment-dev-loan",
         Key: {
           id,
         },

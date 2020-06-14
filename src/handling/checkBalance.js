@@ -1,10 +1,7 @@
 const Joi = require("joi");
-const dynamoDB = require("../../dynamodb");
-const  createError =  require("http-errors") ;
 
 const checkBalance = async (loan, requestBody) => {
-  const data = await JSON.parse(requestBody);
-
+  const data = requestBody;
   const schema = Joi.object().keys({
     payment: Joi.number().required(),
   });
@@ -12,11 +9,10 @@ const checkBalance = async (loan, requestBody) => {
   if (error) {
     return {
       statusCode: 400,
-      body: JSON.stringify( error.details),
+      body: JSON.stringify(error.details),
     };
   }
-
-  if (loan.amount === 0 ) {
+  if (loan.amount === 0) {
     return {
       statusCode: 200,
       body: "DisburseLoan",
@@ -33,6 +29,6 @@ const checkBalance = async (loan, requestBody) => {
     return {
       body: "Exceed",
     };
-  } 
+  }
 };
 module.exports = checkBalance;

@@ -38,3 +38,4 @@
 - lambda functions (CRUD)  
 - app.js: will get the response from handling functions and invoke handlingDisburse
 3. disburse: to evaluate the checkBalance result and send back a response to handling functions (which has been imported to app.js)
+4. Jest was using for building unit test (npm run watch)
